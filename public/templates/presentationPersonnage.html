@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="../index.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="../index.js"></script>
+
+
+</head>
+<body id="presentationbody">
+    <div id="presentation">
+        <img src="" id="imagepersonnepresentation"/>
+        <img src id="fondpersonnepresentation"/>
+        <div id="bloctextepresentation">
+            <button id="btnpresentation">Rencontrer le nouveau protagoniste</button>
+            <div id="textepresentation">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer bibendum lacus eu ultrices tincidunt. Integer et tempor enim. Maecenas finibus ipsum neque, quis porta nunc euismod at. Donec aliquam quis lacus sed rhoncus.
+            </div>
+        </div>
+    </div>
+    <a href="/"><img src="/images/Cross.png" alt="Retour" id="buttonback"/></a>
+    <a id="next" href="/templates/questions.html"><img src="/images/next.png" alt="questions" id="buttonnext"/></a>
+</body>
+</html>
+<script>
+
+    var sons = {
+        deforestation : ["Bucheron",3, 5],
+        eau : ["Poisson",2, 2],
+        dechet : ["Eboueur", 3, 3],
+        petrole : ["Electricien", 3, 4],
+        olympique : ["Francais", 4, 4],
+    }
+
+    document.getElementById('btnpresentation').addEventListener('click', function() {
+        document.getElementById('btnpresentation').style.display = 'none';
+        document.getElementById('textepresentation').style.display = 'block';
+        var presentation = getParameterByName('parameter');
+        var audio = new Audio('/sons/' + sons[presentation][0] + '/intro' + sons[presentation][0] + '.mp3');
+        audio.play();
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+    var presentation = getParameterByName('parameter');
+    console.log(presentation)
+    if (presentation) {
+        if (presentation == 'deforestation'){
+            var textepresentation = "SALUT AVENTURIER DU GLOBE ! Tous les arbres de ma forêt ont été rasés par les multinationales ferrues de bois, ainsi que les marchands de sapin de noël... Si seulement les gens avaient été sensibilisés à l'importance des arbres et aux conséquences de la déforestation... Ho ! Mais si tu es là, c'est qu'il n'est pas trop tard ! Laisse-moi t'enseigner tout mon savoir de bûcheron au travers d'un petit quizz !";
+            var divTexte = document.getElementById("textepresentation");
+            divTexte.innerHTML = textepresentation;
+            var divImageFond = document.getElementById("fondpersonnepresentation");
+            divImageFond.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/North_Kaibab_District_Fall_Colors_2018_%2845019328255%29.png/640px-North_Kaibab_District_Fall_Colors_2018_%2845019328255%29.png"
+            var ImagePersonnage = document.getElementById("imagepersonnepresentation");
+            ImagePersonnage.src ="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Abattage_cul%C3%A9e_noire_sapin_Moli%C3%A8res_03.jpg/640px-Abattage_cul%C3%A9e_noire_sapin_Moli%C3%A8res_03.jpg"
+            var buttonnext = document.getElementById("next");
+            buttonnext.href = "/templates/questions.html?parameter=" + presentation+ "&question=1";
+        }else if (presentation == 'eau'){
+            var textepresentation = "Bloup bloup (Salut je suis un poisson, mon eau est totalement polluée, tu aimerais savoir pourquoi ? Alors laisse-moi te faire savoir ce qui se passe sous l'océan...)"
+            var divTexte = document.getElementById("textepresentation");
+            divTexte.innerHTML = textepresentation
+            var divImageFond = document.getElementById("fondpersonnepresentation");
+            divImageFond.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Junkers_JU_87_%E2%80%98Stuka%E2%80%99_airplane_wreck_from_World_War_II.jpg/640px-Junkers_JU_87_%E2%80%98Stuka%E2%80%99_airplane_wreck_from_World_War_II.jpg"
+            var ImagePersonnage = document.getElementById("imagepersonnepresentation");
+            ImagePersonnage.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Georgia_Aquarium_-_Giant_Grouper_edit.jpg/640px-Georgia_Aquarium_-_Giant_Grouper_edit.jpg"
+            var buttonnext  = document.getElementById("next");
+            buttonnext .href = "/templates/questions.html?parameter=" + presentation + "&question=1";
+
+        }else if (presentation == 'dechet'){
+            var textepresentation = "Attendez les gars, ce n'est pas une poubelle, c'est un explorateur du globe ! Hé toi, au lieu de nous regarder travailler, tu veux pas qu'on t'aprennes comment bien gérer et trier les déchêts ? Moi et mes collègues, on est des spécialistes tu vas voir !"
+            var divTexte = document.getElementById("textepresentation");
+            divTexte.innerHTML = textepresentation
+            var divImageFond = document.getElementById("fondpersonnepresentation");
+            divImageFond.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Garbage_truck_in_Tomasz%C3%B3w_Mazowiecki%2C_Poland.jpg/640px-Garbage_truck_in_Tomasz%C3%B3w_Mazowiecki%2C_Poland.jpg"
+            var ImagePersonnage = document.getElementById("imagepersonnepresentation");
+            ImagePersonnage.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Alex_als_M%C3%BCllmann_%2810925986386%29.jpg/640px-Alex_als_M%C3%BCllmann_%2810925986386%29.jpg"
+            var buttonnext  = document.getElementById("next");
+            buttonnext .href = "/templates/questions.html?parameter=" + presentation+ "&question=1";
+        }else if (presentation == 'petrole'){
+            var textepresentation = "Un fil rouge ici... un bleu là... Ho ! Mais c'est que tu m'as fait peur ! Dans cette usine, on gère tout ce qui est lié aux ressources naturelles ! Tu veux en savoir plus ? Ça tombe bien j'ai justement un petit questionnaire de bienvenue, c'est partiiit !"
+            var divTexte = document.getElementById("textepresentation");
+            divTexte.innerHTML = textepresentation
+            var divImageFond = document.getElementById("fondpersonnepresentation");
+            divImageFond.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/00_3783_Oil_and_gas_platform_in_Norway.jpg/640px-00_3783_Oil_and_gas_platform_in_Norway.jpg"
+            var ImagePersonnage = document.getElementById("imagepersonnepresentation");
+            ImagePersonnage.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/PalmercarpenterA.jpg/640px-PalmercarpenterA.jpg"
+            var buttonnext  = document.getElementById("next");
+            buttonnext .href = "/templates/questions.html?parameter=" + presentation+ "&question=1";
+        }else if (presentation == 'olympique'){
+            var textepresentation = "Bonjour, je suis français ! Et cette année c'est les JO de Paris ! Maiiiiis, il semblerait que les organisateurs ne sont pas parfaitement informés de l'impact écologique d'un tel évènement... (Anne hidalgo) Tu es un aventurier du globe non ? Parfait ! Laisse-moi t'en apprendre plus sur la situation actuelle, comme ça tu pourras agir rapidement pour le bien de la planète !"
+            var divTexte = document.getElementById("textepresentation");
+            divTexte.innerHTML = textepresentation
+            var divImageFond = document.getElementById("fondpersonnepresentation");
+            divImageFond.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/VideoCapture_20220609-190922.jpg/640px-VideoCapture_20220609-190922.jpg"
+            var ImagePersonnage = document.getElementById("imagepersonnepresentation");
+            ImagePersonnage.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Paul_Legrand_by_Nadar_c1855.jpg/640px-Paul_Legrand_by_Nadar_c1855.jpg"
+            var buttonnext  = document.getElementById("next");
+            buttonnext .href = "/templates/questions.html?parameter=" + presentation+ "&question=1";
+        }
+
+    }
+    });
+
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+</script>

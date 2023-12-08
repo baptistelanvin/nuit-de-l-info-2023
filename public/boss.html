@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuit de l'info</title>
+    <link href="index.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <script type="text/javascript" src="./index.js"></script>
+
+
+</head>
+
+<body id="bodyaccueil">
+    <img id="boss" src="/images/LUNIX.png" alt="Lunix"></a>
+    
+    <div id="beatLunix">
+        <p>Combattre Lunix la lune ?</p>
+        <div id="alingButton">
+            <button class="buttonLunix" id="yesBeatLunix">Oui !</button>
+            <button class="buttonLunix" id="noBeatLunix">Non...</button>
+        </div>
+    </div>
+
+    <img id="explosion" src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Icon_Atomic_256x256.png" alt="explosion">
+
+    <p class="infoSound"> [N'oublie pas d'activer le son pour une expérience optimale !]</p>
+    
+    <script>
+        nb_click=0
+        document.addEventListener('DOMContentLoaded', function() {
+
+            document.getElementById('yesBeatLunix').addEventListener('click', function() {
+                document.getElementById('beatLunix').style.display = 'none';
+                var audio = new Audio('/sons/Lunix/startBossLunix.mp3');
+                audio.play();
+                audio.addEventListener('ended', function() {
+                    document.getElementById('boss').addEventListener('click', function() {
+                        nb_click += 1
+                        if (nb_click == 5){
+                        var boss = document.getElementById('boss')
+                        boss.style.display="none"
+                        var explosion = document.getElementById('explosion')
+                        var audioBoom = new Audio('/sons/explosion.mp3');
+                        audioBoom.play()
+                        explosion.style.display="block"
+                        var audioOutro = new Audio('/sons/outro.mp3');
+                        audioOutro.play()
+                        audioOutro.addEventListener('ended', function() {
+                            localStorage.clear()
+                            window.location.href = "/index.html";
+                        })
+                }
+
+                document.removeEventListener('click', arguments.callee);
+            });
+            });
+            })
+            
+            document.getElementById('noBeatLunix').addEventListener('click', function() {
+                window.location.href = "/index.html";
+            })
+        })
+
+    </script>
+</body>
+</html>

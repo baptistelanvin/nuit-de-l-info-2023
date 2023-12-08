@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LES AVENTURIERS DU GLOBE</title>
+    <link href="index.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <script type="text/javascript" src="./index.js"></script>
+
+
+</head>
+
+<body id="bodyaccueil">
+<div id="startAdventure">CLIQUEZ POUR JOUER !</div>    
+<p class="titleGame"> LES AVENTURIERS DU GLOBE : </p>
+
+<div id="helpLunix">
+    <p>Aider Lunix la lune ?</p>
+    <div id="alingButton">
+        <button class="buttonLunix" id="yesHelpLunix">Oui !</button>
+        <button class="buttonLunix" id="noHelpLunix">Non...</button>
+    </div>
+</div>
+
+<button id="endOrNot">Fin ?...</button>
+
+    <img class="terre" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Africa_and_Europe_from_a_Million_Miles_Away.png/640px-Africa_and_Europe_from_a_Million_Miles_Away.png" alt="Terre">
+    <img class="lunix" src="/images/LUNIX.png" alt="Lunix">
+
+    <div class="divLPR">
+        <img class="LPR" src="/images/LPR.png" alt="LPR">
+        <p class="infoLPR">Site réalisé par les p'tits rigolos :)</p>  
+    </div>
+
+    <a href="./templates/presentationPersonnage.html?parameter=deforestation" ><img class="deforestation" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Icon_Tree_256x256.png/640px-Icon_Tree_256x256.png" alt="deforestation" id="deforestation"></a>
+    <a href="./templates/presentationPersonnage.html?parameter=eau"><img class="eau" src="https://upload.wikimedia.org/wikipedia/commons/1/12/Drinking_water.png" alt="eau" id="eau"></a>
+    <a href="./templates/presentationPersonnage.html?parameter=dechet"><img class="dechet" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Empty_Bin_Icon.png/640px-Empty_Bin_Icon.png" alt="dechet" id="dechet"></a>
+    <a href="./templates/presentationPersonnage.html?parameter=petrole" ><img class="petrole" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Oil_or_gas_pump_map_icon.png/640px-Oil_or_gas_pump_map_icon.png" alt="Ressource naturelles" id="petrole"></a>
+    <a href="./templates/presentationPersonnage.html?parameter=olympique"><img class="olympique" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Cerchi_olimpici.png/640px-Cerchi_olimpici.png" alt="Jeux olympique" id="olympique"></a>
+
+    <img id="nuage_deforestation" class="nuage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Cloud_Icon.png/640px-Cloud_Icon.png">
+    <img id="nuage_eau" class="nuage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Cloud_Icon.png/640px-Cloud_Icon.png">
+    <img id="nuage_dechet" class="nuage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Cloud_Icon.png/640px-Cloud_Icon.png">
+    <img id="nuage_petrole" class="nuage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Cloud_Icon.png/640px-Cloud_Icon.png">
+    <img id="nuage_olympique" class="nuage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Cloud_Icon.png/640px-Cloud_Icon.png">
+
+    <p class="infoSound"> [N'oublie pas d'activer le son pour une expérience optimale !]</p>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!localStorage.getItem('visited')) {
+            localStorage.setItem('visited', 'true');
+    
+            document.addEventListener('click', function() {
+              document.getElementById('startAdventure').style.display = 'none';
+              var audio = new Audio('/sons/Lunix/bvnLunix.mp3');
+              audio.play();
+              document.removeEventListener('click', arguments.callee);
+            });
+            
+            document.getElementById('yesHelpLunix').addEventListener('click', function() {
+                document.getElementById('helpLunix').style.display = 'none';
+                var audio = new Audio('/sons/Lunix/ouiLunix.mp3');
+                audio.play();
+                document.removeEventListener('click', arguments.callee);
+                document.getElementById('deforestation').style.display = 'block';
+                document.getElementById('eau').style.display = 'block';
+                document.getElementById('dechet').style.display = 'block';
+                document.getElementById('petrole').style.display = 'block';
+                document.getElementById('olympique').style.display = 'block';
+            });
+
+            document.getElementById('noHelpLunix').addEventListener('click', function() {
+                document.getElementById('helpLunix').style.display = 'none';
+                var audio = new Audio('/sons/Lunix/nonLunix.mp3');
+                audio.play();
+                document.removeEventListener('click', arguments.callee);
+                document.getElementById('deforestation').style.display = 'block';
+                document.getElementById('eau').style.display = 'block';
+                document.getElementById('dechet').style.display = 'block';
+                document.getElementById('petrole').style.display = 'block';
+                document.getElementById('olympique').style.display = 'block';
+            });
+
+            } else {
+                document.getElementById('startAdventure').style.display = 'none';
+                document.getElementById('helpLunix').style.display = 'none';
+            }
+
+            if (localStorage.getItem('nuage_deforestation')) {
+                document.getElementById('nuage_deforestation').style.display = 'none';
+                document.getElementById('deforestation').style.display = 'none';
+            } else {
+                document.getElementById('deforestation').style.display = 'block';
+            }
+            
+            if (localStorage.getItem('nuage_eau')) {
+                document.getElementById('nuage_eau').style.display = 'none';
+                document.getElementById('eau').style.display = 'none';
+            } else {
+                document.getElementById('eau').style.display = 'block';
+            }
+            
+            if (localStorage.getItem('nuage_dechet')) {
+                document.getElementById('nuage_dechet').style.display = 'none';
+                document.getElementById('dechet').style.display = 'none';
+            } else {
+                document.getElementById('dechet').style.display = 'block';
+            }
+            
+            if (localStorage.getItem('nuage_petrole')) {
+                document.getElementById('nuage_petrole').style.display = 'none';
+                document.getElementById('petrole').style.display = 'none';
+            } else {
+                document.getElementById('petrole').style.display = 'block';
+            }
+            
+            if (localStorage.getItem('nuage_olympique')){
+                document.getElementById('nuage_olympique').style.display = 'none';
+                document.getElementById('olympique').style.display = 'none';
+            } else {
+                document.getElementById('olympique').style.display = 'block';
+            }
+
+            if (localStorage.getItem('nuage_deforestation') && localStorage.getItem('nuage_eau') && localStorage.getItem('nuage_dechet') && localStorage.getItem('nuage_petrole') && localStorage.getItem('nuage_olympique')){
+                document.getElementById('endOrNot').style.display = 'block';
+                
+                document.getElementById('endOrNot').addEventListener('click', function() {
+                    document.getElementById('endOrNot').style.display = 'none';
+                    var audio = new Audio('/sons/Lunix/evilLunix.mp3');
+                    audio.play();
+                    document.removeEventListener('click', arguments.callee);
+                    audio.addEventListener('ended', function() {
+                        window.location.href = "/boss.html";
+                    });
+                });
+            }
+        })
+    </script>
+</body>
+</html>

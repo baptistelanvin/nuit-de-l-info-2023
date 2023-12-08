@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="../index.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="../index.js"></script>
+
+
+</head>
+<body id="qcmbody">
+    <div id="qcm">
+        <img src="" id="imagepersonneqcm"/>
+        <img src id="fondpersonneqcm"/>
+        <div id="bloctexteqcm">
+            <div id="titreqcm">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </div>
+            <div id="reponsesqcm">
+                <div class="reponsesqcmlignes">
+                    <button onclick="checkAnswer(1)" class="reponse" id="reponse1"></button>
+                    <button onclick="checkAnswer(2)" class="reponse" id="reponse2"></button>
+                </div>
+                <div class="reponsesqcmlignes">
+                    <button onclick="checkAnswer(3)" class="reponse" id="reponse3"></button>
+                    <button onclick="checkAnswer(4)" class="reponse" id="reponse4"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="/"><img src="/images/Cross.png" alt="Retour" id="buttonback"/></a>
+    <a id="next" style="display: none;" href="/templates/questions.html"><img src="/images/next.png" alt="questions" id="buttonnext"/></a>
+</body>
+</html>
+
+<script>
+    var dict = {
+        deforestation : {
+            question1 : ["Quel pourcentage de la surface terrestre représente les forêts", "50%", "40%", "30%", "15%", 3],
+            question2 : ["Selon-vous quelle est la partie du monde la plus touchée ?", "Afrique", "Amérique", "Europe", "Asie", 2],
+            question3 : ["Quelle est la principale activité humaine responsable de la déforestation ?", "Exploitation du bois", "Extraction de Pétrole/Gaz/Charbon", "Culture agricole et élevage", "Urbanisation", 3],
+            question4 : ["Quel en est la part coupée illégalement ?", "40%", "60%", "50%", "80%",3],
+            question5 : ["D'après vous, sur 100 arbres coupés dans le monde, combien sont destinés à l'industrie papetière ?", "5", "10", "20", "65", 3],
+        },
+        eau : {
+            question1 : ["Sur toute l'eau disponible sur la planète, combien représente l'eau douce ?", "0,05 %", "50 %", "3 %", "97 %", 3],
+            question2 : ["Quelle est la principale cause de pollution de l'eau dans le monde ?", "Transports", "Industries (Usines)", "Agriculture", "Déchets domestiques (maison)", 2],
+            question3 : ["Quels déchets sont les plus présents dans les mers du monde ?", "Les filets de pêche", "Les plastiques", "Les épaves de bateau", "Les poissons", 2],
+            question4 : ["Combien de tonnes d'eau radioactive ont été déversées dans l'océan Pacifique en 2017 à Fukushima ?", "7", "770 000", "70 000", "300 000", 2],
+            question5 : ["D'après vous, quelle est la part de l'eau polluée en France ?", "15 % de rivières et aucune pollution des eaux souterraines.", "50 % des rivières et 25 % des eaux souterraines.", "30 % des rivières et 75 % des eaux souterraines.", "75 % des rivières et 50 % des eaux souterraines.", 4]
+        },
+        dechet : {
+            question1 : ["Comment appelle-t-on une source d'énergie qui s'épuise rapidement ?", "Une énergie non renouvelable", "Une énergie renouvelable", "Une énergie nouvelle", "Une énergie non-nouvelle", 1],
+            question2 : ["Quel système l'Homme a-t-il mis en place pour pallier le manque d'eau ?", "L'irrigation", "L'utilisation d'engrais", "L'utilisation de produits phytosanitaires", "La biomasse", 1],
+            question3 : ["Quel phénomène d'extraction peut causer des marées noires ?", "L'extraction du pétrole", "L'extraction du méthane", "L'extraction du sodium", "L'extraction de l'engrais", 1],
+            question4 : ["Quel système l'Homme a-t-il mis en place pour compenser l'appauvrissement des sols ?", "L'irrigation", "L'utilisation d'engrais", "L'utilisation de produits phytosanitaires", "La biomasse", 1],
+            question5 : ["Quel est le principal défi lié à la gestion des déchets radioactifs produits par l'industrie nucléaire ?", "Facilité de stockage", "Courte durée de vie des déchets", "Risque de contamination à long terme", "Utilisation dans d'autres applications industrielles", 3]
+        }, 
+        petrole : {
+            question1 : ["En France, combien de kilos de déchets sont produits par habitant en moyenne ?", "88 kg d’ordures ménagères", "179 kg d’ordures ménagères", "354 kg d’ordures ménagères", "776 kg d’ordures ménagères", 3],
+            question2 : ["Quel est l'objet polluant retrouvé le plus fréquemment dans les océans et sur les côtes ?", "Les mégots de cigarettes", "Les emballages alimentaires", "Les canettes de boisson", "Les pailles en plastique", 1],
+            question3 : ["À votre avis, quel est le pays dans le monde qui produit le plus de déchets municipaux ?", "Les États-Unis", "L'Allemagne", "La Chine", "Monaco", 3],
+            question4 : ["Quelle proportion de Français pratique le compostage des déchets de cuisine et/ou déchets verts ?", "12 %", "23 %", "41 %", "50 %", 4],
+            question5 : ["En France, quel est le taux de recyclage du verre ?", "58 %", "71 %", "88 %", "95 %", 3],
+        },
+        olympique : {
+            question1 : ["Quel bilan carbones, les organisateurs prévoient-ils pour les JO 2024 ?", "826 mille tonnes d'équivalent CO2", "1,58 million de tonnes d’équivalent CO2", "3 millions de tonnes d'équivalent C02", "300 mille tonnes d'équivalent C02", 2],
+            question2 : ["Quel est le nombre de locataires de logements CROUS expulsés ? ", "3000", "10000", "6000", "1500", 1],
+            question3 : ["Quel est l'évaluation grossière de la répartition des émissions pendant les JO ?", "34 % des déplacements des spectateurs/officiels/athlètes, 33 % des constructions et 33 % des « opérations", "25 % des déplacements des spectateurs/officiels/athlètes, 45 % des constructions et 30 % des « opérations", "65 % des déplacements des spectateurs/officiels/athlètes, 20 % des constructions et 15 % des « opérations", "20 % des déplacements des spectateurs/officiels/athlètes, 38 % des constructions et 42 % des « opérations",1 ],
+            question4 : ["Quel est le sport le plus polluant ?", "Le football", "La nage", "La course à pied", "Le golf", 4],
+            question5 : ["Quel est le pourcentage global du budget alloué à l'environnement ?", "10%", "Inférieur à 1%", "15%", "25%", 2]
+        }
+    }
+
+    var sons = {
+        deforestation : ["Bucheron",3, 5],
+        eau : ["Poisson",2, 2],
+        dechet : ["Eboueur", 3, 3],
+        petrole : ["Electricien", 3, 4],
+        olympique : ["Francais", 4, 4],
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+    var presentation = getParameterByName('parameter');
+    console.log(presentation)
+    if (presentation) {
+        if (presentation == 'deforestation'){
+            var question = getParameterByName('question');
+            var id = parseInt(question)
+            question = "question" + question
+            
+            var titreqcm = dict["deforestation"][question][0];
+            var divTexte = document.getElementById("titreqcm");
+            divTexte.innerHTML = titreqcm;
+            var divImageFond = document.getElementById("fondpersonneqcm");
+            divImageFond.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/North_Kaibab_District_Fall_Colors_2018_%2845019328255%29.png/640px-North_Kaibab_District_Fall_Colors_2018_%2845019328255%29.png"
+            var ImagePersonnage = document.getElementById("imagepersonneqcm");
+            ImagePersonnage.src ="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Abattage_cul%C3%A9e_noire_sapin_Moli%C3%A8res_03.jpg/640px-Abattage_cul%C3%A9e_noire_sapin_Moli%C3%A8res_03.jpg"
+            
+            var reponse1 = document.getElementById("reponse1");
+            var reponse2 = document.getElementById("reponse2");
+            var reponse3 = document.getElementById("reponse3");
+            var reponse4 = document.getElementById("reponse4");
+            reponse1.innerHTML = dict["deforestation"][question][1]
+            reponse2.innerHTML = dict["deforestation"][question][2]
+            reponse3.innerHTML = dict["deforestation"][question][3]
+            reponse4.innerHTML = dict["deforestation"][question][4]
+
+
+        }else if (presentation == 'eau'){
+            var question = getParameterByName('question');
+            var id = parseInt(question)
+            question = "question" + question
+
+            var titreqcm = dict["eau"][question][0]
+            var divTexte = document.getElementById("titreqcm");
+            divTexte.innerHTML = titreqcm
+            var divImageFond = document.getElementById("fondpersonneqcm");
+            divImageFond.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Junkers_JU_87_%E2%80%98Stuka%E2%80%99_airplane_wreck_from_World_War_II.jpg/640px-Junkers_JU_87_%E2%80%98Stuka%E2%80%99_airplane_wreck_from_World_War_II.jpg"
+            var ImagePersonnage = document.getElementById("imagepersonneqcm");
+            ImagePersonnage.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Georgia_Aquarium_-_Giant_Grouper_edit.jpg/640px-Georgia_Aquarium_-_Giant_Grouper_edit.jpg"
+            
+            var reponse1 = document.getElementById("reponse1");
+            var reponse2 = document.getElementById("reponse2");
+            var reponse3 = document.getElementById("reponse3");
+            var reponse4 = document.getElementById("reponse4");
+            reponse1.innerHTML = dict["eau"][question][1]
+            reponse2.innerHTML = dict["eau"][question][2]
+            reponse3.innerHTML = dict["eau"][question][3]
+            reponse4.innerHTML = dict["eau"][question][4]
+
+
+        }else if (presentation == 'dechet'){
+            var question = getParameterByName('question');
+            var id = parseInt(question)
+            question = "question" + question
+
+            var titreqcm = dict["dechet"][question][0]
+            var divTexte = document.getElementById("titreqcm");
+            divTexte.innerHTML = titreqcm
+            var divImageFond = document.getElementById("fondpersonneqcm");
+            divImageFond.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Garbage_truck_in_Tomasz%C3%B3w_Mazowiecki%2C_Poland.jpg/640px-Garbage_truck_in_Tomasz%C3%B3w_Mazowiecki%2C_Poland.jpg"
+            var ImagePersonnage = document.getElementById("imagepersonneqcm");
+            ImagePersonnage.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Alex_als_M%C3%BCllmann_%2810925986386%29.jpg/640px-Alex_als_M%C3%BCllmann_%2810925986386%29.jpg"
+
+            var reponse1 = document.getElementById("reponse1");
+            var reponse2 = document.getElementById("reponse2");
+            var reponse3 = document.getElementById("reponse3");
+            var reponse4 = document.getElementById("reponse4");
+            reponse1.innerHTML = dict["dechet"][question][1]
+            reponse2.innerHTML = dict["dechet"][question][2]
+            reponse3.innerHTML = dict["dechet"][question][3]
+            reponse4.innerHTML = dict["dechet"][question][4]
+        
+        }else if (presentation == 'petrole'){
+            var question = getParameterByName('question');
+            var id = parseInt(question)
+            question = "question" + question
+
+            var titreqcm = dict["petrole"][question][0]
+            var divTexte = document.getElementById("titreqcm");
+            divTexte.innerHTML = titreqcm
+            var divImageFond = document.getElementById("fondpersonneqcm");
+            divImageFond.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/00_3783_Oil_and_gas_platform_in_Norway.jpg/640px-00_3783_Oil_and_gas_platform_in_Norway.jpg"
+            var ImagePersonnage = document.getElementById("imagepersonneqcm");
+            ImagePersonnage.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/PalmercarpenterA.jpg/640px-PalmercarpenterA.jpg"
+            
+            var reponse1 = document.getElementById("reponse1");
+            var reponse2 = document.getElementById("reponse2");
+            var reponse3 = document.getElementById("reponse3");
+            var reponse4 = document.getElementById("reponse4");
+            reponse1.innerHTML = dict["petrole"][question][1]
+            reponse2.innerHTML = dict["petrole"][question][2]
+            reponse3.innerHTML = dict["petrole"][question][3]
+            reponse4.innerHTML = dict["petrole"][question][4]
+
+        }else if (presentation == 'olympique'){
+            var question = getParameterByName('question');
+            var id = parseInt(question)
+            question = "question" + question
+
+            var titreqcm = dict["olympique"][question][0]
+            var divTexte = document.getElementById("titreqcm");
+            divTexte.innerHTML = titreqcm
+            var divImageFond = document.getElementById("fondpersonneqcm");
+            divImageFond.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/VideoCapture_20220609-190922.jpg/640px-VideoCapture_20220609-190922.jpg"
+            var ImagePersonnage = document.getElementById("imagepersonneqcm");
+            ImagePersonnage.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Paul_Legrand_by_Nadar_c1855.jpg/640px-Paul_Legrand_by_Nadar_c1855.jpg"
+            
+            var reponse1 = document.getElementById("reponse1");
+            var reponse2 = document.getElementById("reponse2");
+            var reponse3 = document.getElementById("reponse3");
+            var reponse4 = document.getElementById("reponse4");
+            reponse1.innerHTML = dict["olympique"][question][1]
+            reponse2.innerHTML = dict["olympique"][question][2]
+            reponse3.innerHTML = dict["olympique"][question][3]
+            reponse4.innerHTML = dict["olympique"][question][4]
+
+        
+        }
+
+    }
+    });
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    
+    function checkAnswer(id) {
+        var presentation = getParameterByName('parameter');
+        var question = getParameterByName('question');
+        var idQuestion = parseInt(question)
+        question = "question" + question
+
+        if (id === dict[presentation][question][5]) {
+            document.getElementById('reponse' + id).style.backgroundColor = "green";
+            var buttonnext = document.getElementById("next");
+            buttonnext.style.display="contents"
+
+            
+
+            idQuestion=idQuestion+1
+            if (idQuestion==6){
+                buttonnext.href = "/"
+                var url = '/';
+                var id_nuage = "nuage_" + presentation
+                localStorage.setItem(id_nuage, 'true');
+                string_son = "outro"+sons[presentation][0]
+                var audio = new Audio('/sons/'+sons[presentation][0] + '/' +string_son+'.mp3');
+                audio.play()
+            }else{
+                buttonnext.href = "/templates/questions.html?parameter=" + presentation + "&question=" + idQuestion; 
+                string_son = "oui"+sons[presentation][0]
+                nb_son =  sons[presentation][1]
+                son_joue = Math.floor(Math.random() * nb_son) + 1
+                string_son = string_son+ son_joue
+                console.log(string_son)
+                var audio = new Audio('/sons/'+sons[presentation][0] + '/' +string_son+'.mp3');
+                audio.play()
+            }
+        } else {
+            document.getElementById('reponse' + id).style.backgroundColor = "red";
+            string_son = "non"+sons[presentation][0]
+            nb_son =  sons[presentation][1]
+            son_joue = Math.floor(Math.random() * nb_son) + 1
+            string_son = string_son+ son_joue
+            console.log(string_son)
+            var audio = new Audio('/sons/'+sons[presentation][0] + '/' +string_son+'.mp3');
+            audio.play()
+    }
+}
+</script>
